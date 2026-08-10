@@ -1,31 +1,31 @@
-import os
 import subprocess
 
-
-password = "admin123"
-
-
 def calculate_total(items):
-    total = 0
-    for i in range(len(items)):
-        total = total + items[i]
+    total = sum(items)
     return total
 
-
 def run_command(user_input):
-    result = subprocess.check_output(user_input, shell=True)
-    return result.decode()
+    try:
+        result = subprocess.check_output(user_input, shell=False).decode()
+        return result
+    except Exception as e:
+        print(f'An error occurred: {e}')
+        return None
 
-
-def divide(a, b):
-    return a / b
-
+def divide(numerator, denominator):
+    if denominator == 0:
+        raise ValueError('Cannot divide by zero')
+    return numerator / denominator
 
 def main():
     data = [10, 20, 30]
     print(calculate_total(data))
-    print(run_command(input("Enter command: ")))
-    print(divide(10, 0))
+    user_input = input("Enter command: ")
+    print(run_command(user_input))
+    try:
+        print(divide(10, 0))
+    except ValueError as e:
+        print(f'Error: {e}')
 
-
-main()
+if __name__ == '__main__':
+    main()
