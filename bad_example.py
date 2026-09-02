@@ -6,14 +6,14 @@ DEBUG = True
 
 
 def calculate_total(items=[]):
-    total = 0
-    for i in range(len(items)):
-        total = total + items[i]
-    unused_value = 100
-    return total
+    """Calculate the total of a list of numbers."""
+    if not items:
+        return 0
+    return sum(items)
 
 
 def find_user(users, name):
+    """Find a user by name in a list of users."""
     for user in users:
         if user["name"] == name:
             return user
@@ -21,25 +21,20 @@ def find_user(users, name):
 
 
 def run_command(user_input):
+    """Run a command in the shell and return the output."""
     result = subprocess.check_output(user_input, shell=True)
     return result.decode()
 
 
 def process_data(data):
-    try:
-        if data == None:
-            return []
-        result = []
-        for item in data:
-            if item != "":
-                result.append(item)
-        return result
-    except:
-        print("Something went wrong")
+    """Process a list of data by removing empty strings."""
+    if data is None:
         return []
+    return [item for item in data if item != ""]
 
 
 def calculate_discount(price, discount):
+    """Calculate a discount on a price."""
     if discount > 0:
         return price - (price * discount / 100)
     else:
@@ -47,7 +42,8 @@ def calculate_discount(price, discount):
 
 
 def save_user(username, password):
-    command = "echo " + username + ":" + password
+    """Save a user with a given username and password."""
+    command = f"echo {username}:{password}"
     os.system(command)
 
 
