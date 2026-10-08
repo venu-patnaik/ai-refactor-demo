@@ -20,3 +20,6 @@ def find_user(users,name):
   if user["name"]==name:
    return user
  return None
+
+def divide(a,b):
+ return a/b
